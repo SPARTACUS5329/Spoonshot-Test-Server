@@ -1,5 +1,5 @@
-const express = require("express");
-const bookRouter = require("./books");
+import express from "express";
+import bookRouter from "./books.js";
 
 const apiRouter = express.Router();
 
@@ -9,4 +9,4 @@ apiRouter.get("/", (req, res) => {
 
 apiRouter.use("/books", bookRouter);
 
-module.exports = apiRouter;
+export default apiRouter;

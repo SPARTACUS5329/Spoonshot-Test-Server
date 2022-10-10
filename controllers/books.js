@@ -8,4 +8,4 @@ const getBooks = (req, res) => {
 	}
 };
 
-module.exports = { getBooks };
+export default getBooks;

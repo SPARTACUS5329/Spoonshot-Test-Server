@@ -1,9 +1,8 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-
-const connectToMongoDB = require("./config/mongodbConfig.js");
-const apiRouter = require("./routes/index.js");
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import connectToMongoDB from "./config/mongodbConfig.js";
+import apiRouter from "./routes/index.js";
 
 const PORT = process.env.PORT || 8000;
 const app = express();
