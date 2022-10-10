@@ -3,6 +3,6 @@ const { getBooks } = require("../controllers/books");
 
 const bookRouter = express.Router();
 
-// companyRouter.post("/register", register);
+bookRouter.get("/", getBooks);
 
 module.exports = bookRouter;

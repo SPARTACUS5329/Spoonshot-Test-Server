@@ -7,6 +7,6 @@ apiRouter.get("/", (req, res) => {
 	res.send("42");
 });
 
-apiRouter.use("/company", bookRouter);
+apiRouter.use("/books", bookRouter);
 
 module.exports = apiRouter;
