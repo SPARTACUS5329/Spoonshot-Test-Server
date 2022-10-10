@@ -13,13 +13,12 @@ const main = async () => {
 	app.use(
 		cors({
 			credentials: true,
-			origin: ["http://localhost:5173"],
+			origin: ["http://127.0.0.1:5173"],
 		})
 	);
 
 	// Parsing Request body and cookies
 	app.use(bodyParser.json({ limit: "50mb" }));
-	app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 
 	app.use("/", apiRouter);
 
