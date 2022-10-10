@@ -3,13 +3,16 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const getBooks = async (req, res) => {
-	const { title, author } = req.query;
+	let { title, author } = req.query;
+	if (title === undefined && author === undefined) return res.status(400).send("Invalid inputs");
+	if (title === undefined) title = "";
+	if (author === undefined) author = "";
 	try {
 		const result = await axios.get(`/?q=${title}+inauthor:${author}`);
-		res.status(200).send(result.data);
+		return res.status(200).send(result.data);
 	} catch (error) {
 		console.log(error.message);
-		res.status(500).send({ error: "There was an error" });
+		return res.status(500).send({ error: "There was an error" });
 	}
 };
 
