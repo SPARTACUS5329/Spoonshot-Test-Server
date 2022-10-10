@@ -1,10 +1,15 @@
-const getBooks = (req, res) => {
+import axios from "../config/_axios.js";
+import dotenv from "dotenv";
+dotenv.config();
+
+const getBooks = async (req, res) => {
+	const { title, author } = req.query;
 	try {
-		console.log("Working");
-		res.status(200).send("Working");
+		const result = await axios.get(`/?q=${title}+inauthor:${author}`);
+		res.status(200).send(result.data);
 	} catch (error) {
-		console.error(error);
-		res.status(500).send("Server error");
+		console.log(error.message);
+		res.status(500).send({ error: "There was an error" });
 	}
 };
 
