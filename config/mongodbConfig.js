@@ -4,7 +4,8 @@ dotenv.config();
 
 const MONGODB_URI =
 	// eslint-disable-next-line no-undef
-	process.env.NODE_ENV === "production" ? process.env.dataBaseURL : "mongodb://127.0.0.1:27017";
+	// process.env.NODE_ENV === "production" ? process.env.dataBaseURL : "mongodb://127.0.0.1:27017";
+	process.env.DATABASE_URL || "mongodb://127.0.0.1:27017";
 
 const connectToMongoDB = async () => {
 	try {

@@ -39,7 +39,6 @@ export const addBooksToInventory = async (req, res) => {
 		books.map((book) => {
 			if (Object.hasOwn(map, book.googleBookID)) {
 				inventory[map[book.googleBookID]].stock += book.stock;
-				// Book.updateOne({googleBookID: book.googleBookID}, )
 				inventory[map[book.googleBookID]].save();
 			} else diffs = [...diffs, book];
 		});
