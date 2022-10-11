@@ -43,8 +43,6 @@ export const addBooksToInventory = async (req, res) => {
 				inventory[map[book.googleBookID]].save();
 			} else diffs = [...diffs, book];
 		});
-		console.log(inventory);
-		// Book.update({}, )
 		Book.insertMany(diffs);
 		res.status(200).send("Successfully added");
 	} catch (error) {
@@ -54,12 +52,20 @@ export const addBooksToInventory = async (req, res) => {
 };
 
 export const updateInventory = async (req, res) => {
-	let { inventory } = req.body;
-	console.log(inventory);
+	const { inventory: books } = req.body;
 	try {
-		const curr = await Book.find({});
-		console.log(curr);
-		res.status(200).send(curr);
+		const inventory = await Book.find({});
+		let map = {};
+		inventory.map((book, index) => {
+			map[book.googleBookID] = index;
+		});
+		books.map((book) => {
+			if (Object.hasOwn(map, book.googleBookID)) {
+				inventory[map[book.googleBookID]].stock = book.stock;
+				inventory[map[book.googleBookID]].save();
+			} else throw Error("Book not found");
+		});
+		res.status(200).send("Successfully added");
 	} catch (error) {
 		console.error(error);
 		res.status(500).send({ error: error.message });

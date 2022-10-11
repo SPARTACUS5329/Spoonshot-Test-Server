@@ -14,7 +14,7 @@ const main = async () => {
 		cors({
 			credentials: true,
 			origin: "http://127.0.0.1:5173",
-			methods: ["GET", "POST", "DELETE"],
+			methods: ["GET", "POST", "DELETE", "PUT"],
 		})
 	);
 
