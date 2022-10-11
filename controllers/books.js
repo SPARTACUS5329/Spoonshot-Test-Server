@@ -37,9 +37,12 @@ export const addBooksToInventory = async (req, res) => {
 			map[book.googleBookID] = index;
 		});
 		books.map((book) => {
+			console.log(book);
 			if (Object.hasOwn(map, book.googleBookID)) {
-				inventory[map[book.googleBookID]].stock += book.stock;
-				inventory[map[book.googleBookID]].save();
+				if (inventory[map[book.googleBookID]].stock !== book.stock) {
+					inventory[map[book.googleBookID]].stock += book.stock;
+					inventory[map[book.googleBookID]].save();
+				}
 			} else diffs = [...diffs, book];
 		});
 		Book.insertMany(diffs);
@@ -58,10 +61,10 @@ export const updateInventory = async (req, res) => {
 		inventory.map((book, index) => {
 			map[book.googleBookID] = index;
 		});
-		books.map((book) => {
+		books.map(async (book) => {
 			if (Object.hasOwn(map, book.googleBookID)) {
 				inventory[map[book.googleBookID]].stock = book.stock;
-				inventory[map[book.googleBookID]].save();
+				await inventory[map[book.googleBookID]].save();
 			} else throw Error("Book not found");
 		});
 		res.status(200).send("Successfully added");
