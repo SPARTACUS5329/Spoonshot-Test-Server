@@ -22,7 +22,7 @@ export const getInventory = async (req, res) => {
 		const result = await Book.find({});
 		res.status(200).send(result);
 	} catch (error) {
-		console.error(error);
+		console.log(error.message);
 		res.status(500).send({ error: error.message });
 	}
 };
@@ -37,7 +37,6 @@ export const addBooksToInventory = async (req, res) => {
 			map[book.googleBookID] = index;
 		});
 		books.map((book) => {
-			console.log(book);
 			if (Object.hasOwn(map, book.googleBookID)) {
 				if (inventory[map[book.googleBookID]].stock !== book.stock) {
 					inventory[map[book.googleBookID]].stock += book.stock;
@@ -48,7 +47,7 @@ export const addBooksToInventory = async (req, res) => {
 		Book.insertMany(diffs);
 		res.status(200).send("Successfully added");
 	} catch (error) {
-		console.error(error);
+		console.log(error.message);
 		res.status(500).send({ error: error.message });
 	}
 };
@@ -69,7 +68,7 @@ export const updateInventory = async (req, res) => {
 		});
 		res.status(200).send("Successfully added");
 	} catch (error) {
-		console.error(error);
+		console.log(error.message);
 		res.status(500).send({ error: error.message });
 	}
 };
