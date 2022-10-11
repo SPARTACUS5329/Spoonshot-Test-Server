@@ -2,8 +2,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
+// Conditional assignment of mongodb database url
 const MONGODB_URI = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017";
 
+// Connects to the given database
 const connectToMongoDB = async () => {
 	try {
 		await mongoose.connect(MONGODB_URI, {
